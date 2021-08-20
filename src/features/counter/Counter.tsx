@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import {
   decrement,
   increment,
   incrementByAmount,
+  reset,
   incrementAsync,
   incrementIfOdd,
   selectCount,
-} from './counterSlice';
-import styles from './Counter.module.css';
+  selectStatus,
+} from "./counterSlice";
+import styles from "./Counter.module.css";
 
 export function Counter() {
   const count = useAppSelector(selectCount);
+  const status = useAppSelector(selectStatus);
   const dispatch = useAppDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
+  const [incrementAmount, setIncrementAmount] = useState("2");
 
   const incrementValue = Number(incrementAmount) || 0;
 
@@ -29,6 +32,7 @@ export function Counter() {
           -
         </button>
         <span className={styles.value}>{count}</span>
+        <span className={styles.value}>{status}</span>
         <button
           className={styles.button}
           aria-label="Increment value"
@@ -61,6 +65,9 @@ export function Counter() {
           onClick={() => dispatch(incrementIfOdd(incrementValue))}
         >
           Add If Odd
+        </button>
+        <button className={styles.button} onClick={() => dispatch(reset())}>
+          Reset
         </button>
       </div>
     </div>
