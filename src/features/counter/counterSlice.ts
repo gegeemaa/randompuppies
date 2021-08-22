@@ -5,11 +5,13 @@ import { fetchCount } from "./counterAPI";
 export interface CounterState {
   value: number;
   status: "idle" | "loading" | "failed";
+  image: string;
 }
 
 const initialState: CounterState = {
   value: 0,
   status: "idle",
+  image: "",
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -17,11 +19,21 @@ const initialState: CounterState = {
 // will call the thunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched. Thunks are
 // typically used to make async requests.
+// export const incrementAsync = createAsyncThunk(
+//   "counter/fetchCount",
+//   async (amount: number) => {
+//     const response = await fetchCount(amount);
+//     // The value we return becomes the `fulfilled` action payload
+//     return response.data;
+//   }
+// );
 export const incrementAsync = createAsyncThunk(
-  "counter/fetchCount",
-  async (amount: number) => {
-    const response = await fetchCount(amount);
+  "https://dog.ceo/api/breeds/image/random",
+  async (dispatch, getState) => {
+    const response = await fetch("").then((res) => res.json());
     // The value we return becomes the `fulfilled` action payload
+    console.log("yu bna end harii");
+    console.log(response.data);
     return response.data;
   }
 );
@@ -59,6 +71,7 @@ export const counterSlice = createSlice({
       .addCase(incrementAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.value += action.payload;
+        console.log(action.payload);
       });
   },
 });

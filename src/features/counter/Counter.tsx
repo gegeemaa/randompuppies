@@ -38,8 +38,14 @@ export function Counter() {
           aria-label="Increment value"
           onClick={() => dispatch(increment())}
         >
-          + Test
+          +
         </button>
+      </div>
+      <div className={styles.row}>
+        <img
+          src="https://images.dog.ceo//breeds//bullterrier-staffordshire//n02093256_3762.jpg"
+          alt="puppy1"
+        />
       </div>
       <div className={styles.row}>
         <input
