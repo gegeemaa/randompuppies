@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState, AppThunk } from "../../app/store";
-import { fetchCount } from "./counterAPI";
+// import { fetchCount } from "./counterAPI";
 
 export interface CounterState {
   value: number;
@@ -11,7 +11,7 @@ export interface CounterState {
 const initialState: CounterState = {
   value: 0,
   status: "idle",
-  image: "",
+  image: "https://images.dog.ceo/breeds/terrier-norwich/n02094258_307.jpg",
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -28,13 +28,18 @@ const initialState: CounterState = {
 //   }
 // );
 export const incrementAsync = createAsyncThunk(
-  "https://dog.ceo/api/breeds/image/random",
+  "dog/random",
   async (dispatch, getState) => {
-    const response = await fetch("").then((res) => res.json());
-    // The value we return becomes the `fulfilled` action payload
-    console.log("yu bna end harii");
-    console.log(response.data);
-    return response.data;
+    return await fetch("https://dog.ceo/api/breeds/image/random")
+      .then(function (response) {
+        // The response is a Response instance.
+        // You parse the data into a useable format using `.json()`
+        return response.json();
+      })
+      .then((data) => {
+        // `data` is the parsed version of the JSON returned from the above endpoint.
+        return data;
+      });
   }
 );
 
@@ -70,7 +75,7 @@ export const counterSlice = createSlice({
       })
       .addCase(incrementAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.value += action.payload;
+        state.image = action.payload.message;
         console.log(action.payload);
       });
   },
@@ -84,6 +89,7 @@ export const { increment, decrement, incrementByAmount, reset } =
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectCount = (state: RootState) => state.counter.value;
 export const selectStatus = (state: RootState) => state.counter.status;
+export const selectImage = (state: RootState) => state.counter.image;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.

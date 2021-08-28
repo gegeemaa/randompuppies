@@ -10,12 +10,14 @@ import {
   incrementIfOdd,
   selectCount,
   selectStatus,
+  selectImage,
 } from "./counterSlice";
 import styles from "./Counter.module.css";
 
 export function Counter() {
   const count = useAppSelector(selectCount);
   const status = useAppSelector(selectStatus);
+  const image = useAppSelector(selectImage);
   const dispatch = useAppDispatch();
   const [incrementAmount, setIncrementAmount] = useState("2");
 
@@ -42,10 +44,14 @@ export function Counter() {
         </button>
       </div>
       <div className={styles.row}>
-        <img
-          src="https://images.dog.ceo//breeds//bullterrier-staffordshire//n02093256_3762.jpg"
-          alt="puppy1"
-        />
+        <img src={image} alt="puppy1" width="300" height="300" />
+        <button
+          className={styles.button}
+          aria-label="New picture"
+          onClick={() => dispatch(incrementAsync())}
+        >
+          New picture
+        </button>
       </div>
       <div className={styles.row}>
         <input
@@ -60,12 +66,12 @@ export function Counter() {
         >
           Add Amount
         </button>
-        <button
+        {/* <button
           className={styles.asyncButton}
           onClick={() => dispatch(incrementAsync(incrementValue))}
         >
           Add Async
-        </button>
+        </button> */}
         <button
           className={styles.button}
           onClick={() => dispatch(incrementIfOdd(incrementValue))}
