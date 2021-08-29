@@ -6,12 +6,16 @@ export interface CounterState {
   value: number;
   status: "idle" | "loading" | "failed";
   image: string;
+  imageArray: string[];
+  index: number;
 }
 
 const initialState: CounterState = {
   value: 0,
   status: "idle",
   image: "https://images.dog.ceo/breeds/terrier-norwich/n02094258_307.jpg",
+  imageArray: [],
+  index: -1,
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -27,6 +31,7 @@ const initialState: CounterState = {
 //     return response.data;
 //   }
 // );
+
 export const incrementAsync = createAsyncThunk(
   "dog/random",
   async (dispatch, getState) => {
@@ -58,6 +63,14 @@ export const counterSlice = createSlice({
     decrement: (state) => {
       state.value -= 1;
     },
+    pervious: (state) => {
+      if (state.index > 0) {
+        state.index -= 1;
+      }
+    },
+    next: (state) => {
+      state.index += 1;
+    },
     reset: (state) => {
       state.value = 0;
     },
@@ -76,20 +89,30 @@ export const counterSlice = createSlice({
       .addCase(incrementAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.image = action.payload.message;
+        state.imageArray.push(action.payload.message);
+        // state.index++;
+        state.index += 1;
         console.log(action.payload);
       });
   },
 });
 
-export const { increment, decrement, incrementByAmount, reset } =
-  counterSlice.actions;
+export const {
+  increment,
+  decrement,
+  incrementByAmount,
+  reset,
+  pervious,
+  next,
+} = counterSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectCount = (state: RootState) => state.counter.value;
 export const selectStatus = (state: RootState) => state.counter.status;
-export const selectImage = (state: RootState) => state.counter.image;
+export const selectImageArray = (state: RootState) => state.counter.imageArray;
+export const selectIndex = (state: RootState) => state.counter.index;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.

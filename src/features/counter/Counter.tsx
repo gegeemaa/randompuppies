@@ -6,80 +6,53 @@ import {
   increment,
   incrementByAmount,
   reset,
+  pervious,
+  next,
   incrementAsync,
   incrementIfOdd,
   selectCount,
   selectStatus,
-  selectImage,
+  selectImageArray,
+  selectIndex,
 } from "./counterSlice";
 import styles from "./Counter.module.css";
 
 export function Counter() {
   const count = useAppSelector(selectCount);
   const status = useAppSelector(selectStatus);
-  const image = useAppSelector(selectImage);
+  const imageArray = useAppSelector(selectImageArray);
+  const index = useAppSelector(selectIndex);
+
   const dispatch = useAppDispatch();
   const [incrementAmount, setIncrementAmount] = useState("2");
 
   const incrementValue = Number(incrementAmount) || 0;
 
+  const onNext = () => {
+    if (imageArray.length > index + 1) {
+      dispatch(next());
+    } else {
+      dispatch(incrementAsync());
+    }
+  };
+
   return (
     <div>
       <div className={styles.row}>
-        <button
-          className={styles.button}
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
-        >
-          -
-        </button>
-        <span className={styles.value}>{count}</span>
+        <span className={styles.value}>{index + 1}</span>
         <span className={styles.value}>{status}</span>
-        <button
-          className={styles.button}
-          aria-label="Increment value"
-          onClick={() => dispatch(increment())}
-        >
-          +
-        </button>
       </div>
       <div className={styles.row}>
-        <img src={image} alt="puppy1" width="300" height="300" />
         <button
           className={styles.button}
-          aria-label="New picture"
-          onClick={() => dispatch(incrementAsync())}
+          aria-label="Pervious"
+          onClick={() => dispatch(pervious())}
         >
-          New picture
+          Pervious
         </button>
-      </div>
-      <div className={styles.row}>
-        <input
-          className={styles.textbox}
-          aria-label="Set increment amount"
-          value={incrementAmount}
-          onChange={(e) => setIncrementAmount(e.target.value)}
-        />
-        <button
-          className={styles.button}
-          onClick={() => dispatch(incrementByAmount(incrementValue))}
-        >
-          Add Amount
-        </button>
-        {/* <button
-          className={styles.asyncButton}
-          onClick={() => dispatch(incrementAsync(incrementValue))}
-        >
-          Add Async
-        </button> */}
-        <button
-          className={styles.button}
-          onClick={() => dispatch(incrementIfOdd(incrementValue))}
-        >
-          Add If Odd
-        </button>
-        <button className={styles.button} onClick={() => dispatch(reset())}>
-          Reset
+        <img src={imageArray[index]} alt="puppy1" width="300" height="300" />
+        <button className={styles.button} aria-label="Next" onClick={onNext}>
+          Next
         </button>
       </div>
     </div>
