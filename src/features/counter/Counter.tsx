@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import {
@@ -35,9 +35,16 @@ export function Counter() {
       dispatch(incrementAsync());
     }
   };
+  useEffect(() => {
+    // Should not ever set state during rendering, so do this in useEffect instead.
+    dispatch(incrementAsync());
+  }, []);
 
   return (
     <div>
+      <div className={styles.row}>
+        <h3>Puppy galleri</h3>
+      </div>
       <div className={styles.row}>
         <span className={styles.value}>{index + 1}</span>
         <span className={styles.value}>{status}</span>

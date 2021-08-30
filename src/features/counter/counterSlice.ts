@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+// import { useEffect } from "react";
 import { RootState, AppThunk } from "../../app/store";
 // import { fetchCount } from "./counterAPI";
 
 export interface CounterState {
   value: number;
-  status: "idle" | "loading" | "failed";
+  status: "" | "loading" | "failed";
   image: string;
   imageArray: string[];
   index: number;
@@ -12,7 +13,7 @@ export interface CounterState {
 
 const initialState: CounterState = {
   value: 0,
-  status: "idle",
+  status: "",
   image: "https://images.dog.ceo/breeds/terrier-norwich/n02094258_307.jpg",
   imageArray: [],
   index: -1,
@@ -47,6 +48,18 @@ export const incrementAsync = createAsyncThunk(
       });
   }
 );
+
+// const MyFunctionnalComponent: React.FC = (props) => {
+//   useEffect(() => {
+//     // Create an scoped async function in the hook
+//     async function anyNameFunction() {
+//       await loadContent();
+//     }
+//     // Execute the created function directly
+//     anyNameFunction();
+//   }, []);
+//   return <div></div>;
+// };
 
 export const counterSlice = createSlice({
   name: "counter",
@@ -87,7 +100,7 @@ export const counterSlice = createSlice({
         state.status = "loading";
       })
       .addCase(incrementAsync.fulfilled, (state, action) => {
-        state.status = "idle";
+        state.status = "";
         state.image = action.payload.message;
         state.imageArray.push(action.payload.message);
         // state.index++;
