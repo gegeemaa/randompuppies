@@ -46,12 +46,9 @@ export function Counter() {
   return (
     <div>
       <div className={styles.row}>
-        <h3>Puppy galleri</h3>
+        <h3>Puppies</h3>
       </div>
-      <div className={styles.row}>
-        <span className={styles.value}>{index + 1}</span>
-        <span className={styles.value}>{status}</span>
-      </div>
+
       <div className={styles.row}>
         <button
           className={clsx(styles.button, styles.angel)}
@@ -73,6 +70,10 @@ export function Counter() {
         <button className={clsx(styles.button, styles.angel)} onClick={onNext}>
           <FaAngleRight />
         </button>
+      </div>
+      <div className={styles.row}>
+        <span className={styles.value}>{index + 1}</span>
+        <span className={styles.value}>{status}</span>
       </div>
     </div>
   );

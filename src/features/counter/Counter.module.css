@@ -6,14 +6,15 @@
 
 .row > button {
   margin-left: 4px;
-  margin-right: 8px;
+  margin-right: 4px;
 }
 .value {
-  font-size: 52px;
+  font-size: 32px;
   padding-left: 16px;
   padding-right: 16px;
   margin-top: 2px;
   font-family: "Courier New", Courier, monospace;
+  text-align: center;
 }
 
 .button {
@@ -74,19 +75,32 @@
 }
 
 img {
-  max-width: 300px;
+  max-width: 400px;
+  margin: 8px;
 }
 
 @media (max-width: 600px) {
   /* For mobile: */
+  .row {
+    width: 100%;
+  }
   .button {
-    font-size: 12px;
-    /* padding-left: 6px;
-    padding-right: 6px; */
+    font-size: 32px;
+    text-align: center;
+    margin-left: 6px;
+    margin-right: 6px;
     border-radius: 1px;
-    display: block;
+    height: 50px;
+    width: 50px;
+    padding-left: 0px;
+    padding-right: 0px;
   }
   img {
-    width: 80%;
+    width: 70%;
+    margin: 4px;
+  }
+  .value {
+    margin-top: 5px;
+    font-size: 20px;
   }
 }
