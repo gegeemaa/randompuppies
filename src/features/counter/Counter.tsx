@@ -17,19 +17,16 @@ import {
   selectStatus,
   selectImageArray,
   selectIndex,
+  indexUpdate,
 } from "./counterSlice";
 import styles from "./Counter.module.css";
 
 export function Counter() {
-  const count = useAppSelector(selectCount);
-  const status = useAppSelector(selectStatus);
   const imageArray = useAppSelector(selectImageArray);
   const index = useAppSelector(selectIndex);
-
   const dispatch = useAppDispatch();
-  const [incrementAmount, setIncrementAmount] = useState("2");
 
-  const incrementValue = Number(incrementAmount) || 0;
+  let count: number | string;
 
   const onNext = () => {
     if (imageArray.length > index + 1) {
@@ -42,6 +39,18 @@ export function Counter() {
     // Should not ever set state during rendering, so do this in useEffect instead.
     dispatch(incrementAsync());
   }, []);
+
+  if (imageArray.length > index + 1) {
+    count = index + 1 + " of " + imageArray.length;
+  } else {
+    count = index + 1;
+  }
+
+  const change = (evt) => {
+    // const name = evt.target.name;
+    const newValue = evt.target.value;
+    dispatch(indexUpdate(newValue));
+  };
 
   return (
     <div>
@@ -56,24 +65,18 @@ export function Counter() {
         >
           <FaAngleLeft />
         </button>
-        {/* <button
-          className={styles.button}
-          aria-label="Pervious"
-          onClick={() => dispatch(pervious())}
-        >
-          Pervious
-        </button> */}
         <img src={imageArray[index]} alt="puppy1" />
-        {/* <button className={styles.button} aria-label="Next" onClick={onNext}>
-          Next
-        </button> */}
         <button className={clsx(styles.button, styles.angel)} onClick={onNext}>
           <FaAngleRight />
         </button>
       </div>
       <div className={styles.row}>
-        <span className={styles.value}>{index + 1}</span>
-        <span className={styles.value}>{status}</span>
+        <select name="puppy" value={index + 1} onChange={change}>
+          {imageArray.map((image, index) => (
+            <option value={index + 1}>{index + 1} puppy</option>
+          ))}
+        </select>
+        <span className={styles.value}>{count} </span>
       </div>
     </div>
   );

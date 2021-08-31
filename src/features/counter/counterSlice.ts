@@ -87,6 +87,9 @@ export const counterSlice = createSlice({
     reset: (state) => {
       state.value = 0;
     },
+    indexUpdate: (state, action: PayloadAction<number>) => {
+      state.index = action.payload;
+    },
     // Use the PayloadAction type to declare the contents of `action.payload`
     incrementByAmount: (state, action: PayloadAction<number>) => {
       state.value += action.payload;
@@ -117,6 +120,7 @@ export const {
   reset,
   pervious,
   next,
+  indexUpdate,
 } = counterSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
