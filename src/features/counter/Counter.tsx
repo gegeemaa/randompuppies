@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
+import clsx from "clsx";
+
 import {
   decrement,
   increment,
@@ -51,15 +54,24 @@ export function Counter() {
       </div>
       <div className={styles.row}>
         <button
+          className={clsx(styles.button, styles.angel)}
+          onClick={() => dispatch(pervious())}
+        >
+          <FaAngleLeft />
+        </button>
+        {/* <button
           className={styles.button}
           aria-label="Pervious"
           onClick={() => dispatch(pervious())}
         >
           Pervious
-        </button>
-        <img src={imageArray[index]} alt="puppy1" width="300" height="300" />
-        <button className={styles.button} aria-label="Next" onClick={onNext}>
+        </button> */}
+        <img src={imageArray[index]} alt="puppy1" />
+        {/* <button className={styles.button} aria-label="Next" onClick={onNext}>
           Next
+        </button> */}
+        <button className={clsx(styles.button, styles.angel)} onClick={onNext}>
+          <FaAngleRight />
         </button>
       </div>
     </div>

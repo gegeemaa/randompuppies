@@ -8,11 +8,6 @@
   margin-left: 4px;
   margin-right: 8px;
 }
-
-.row:not(:last-child) {
-  margin-bottom: 16px;
-}
-
 .value {
   font-size: 52px;
   padding-left: 16px;
@@ -30,7 +25,7 @@
   outline: none;
   border: 2px solid transparent;
   color: rgb(112, 76, 182);
-  padding-bottom: 4px;
+  /* padding-bottom: 4px; */
   /* cursor: pointer; */
   background-color: rgba(112, 76, 182, 0.1);
   border-radius: 2px;
@@ -76,4 +71,22 @@
   width: 0%;
   opacity: 1;
   transition: 0s;
+}
+
+img {
+  max-width: 300px;
+}
+
+@media (max-width: 600px) {
+  /* For mobile: */
+  .button {
+    font-size: 12px;
+    /* padding-left: 6px;
+    padding-right: 6px; */
+    border-radius: 1px;
+    display: block;
+  }
+  img {
+    width: 80%;
+  }
 }
