@@ -28,6 +28,10 @@ export function Counter() {
 
   let count: number | string;
 
+  // const [incrementAmount, setIncrementAmount] = useState("2");
+
+  // const incrementValue = Number(incrementAmount) || 0;
+
   const onNext = () => {
     if (imageArray.length > index + 1) {
       dispatch(next());
@@ -46,10 +50,10 @@ export function Counter() {
     count = index + 1;
   }
 
-  const change = (evt) => {
+  const change = (evt: React.ChangeEvent<HTMLSelectElement>) => {
     // const name = evt.target.name;
     const newValue = evt.target.value;
-    dispatch(indexUpdate(newValue));
+    dispatch(indexUpdate(+newValue));
   };
 
   return (
@@ -71,9 +75,9 @@ export function Counter() {
         </button>
       </div>
       <div className={styles.row}>
-        <select name="puppy" value={index + 1} onChange={change}>
-          {imageArray.map((image, index) => (
-            <option value={index + 1}>{index + 1} puppy</option>
+        <select name="puppy" value={index} onChange={change}>
+          {imageArray.map((image, i) => (
+            <option value={i}>{i + 1} puppy</option>
           ))}
         </select>
         <span className={styles.value}>{count} </span>
