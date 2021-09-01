@@ -18,6 +18,7 @@ import {
   selectImageArray,
   selectIndex,
   indexUpdate,
+  clear,
 } from "./counterSlice";
 import styles from "./Counter.module.css";
 
@@ -26,7 +27,7 @@ export function Counter() {
   const index = useAppSelector(selectIndex);
   const dispatch = useAppDispatch();
 
-  let count: number | string;
+  let count: string;
 
   // const [incrementAmount, setIncrementAmount] = useState("2");
 
@@ -44,22 +45,22 @@ export function Counter() {
     dispatch(incrementAsync());
   }, []);
 
-  if (imageArray.length > index + 1) {
-    count = index + 1 + " of " + imageArray.length;
-  } else {
-    count = index + 1;
-  }
+  count = index + 1 + " av " + imageArray.length;
 
   const change = (evt: React.ChangeEvent<HTMLSelectElement>) => {
     // const name = evt.target.name;
     const newValue = evt.target.value;
     dispatch(indexUpdate(+newValue));
   };
+  const onClear = () => {
+    dispatch(clear());
+    dispatch(incrementAsync());
+  };
 
   return (
     <div>
       <div className={styles.row}>
-        <h3>Puppies</h3>
+        <h3>Valpar</h3>
       </div>
 
       <div className={styles.row}>
@@ -86,12 +87,15 @@ export function Counter() {
           onChange={change}
         >
           {imageArray.map((image, i) => (
-            <option value={i}>{i + 1} puppy</option>
+            <option value={i}>{i + 1} valp</option>
           ))}
         </select>
       </div>
       <div className={styles.row}>
-        <button className={clsx(styles.button, styles.normalButton)}>
+        <button
+          className={clsx(styles.button, styles.normalButton)}
+          onClick={onClear}
+        >
           Rensa histori
         </button>
       </div>
