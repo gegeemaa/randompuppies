@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
 .row > button {
@@ -9,11 +10,10 @@
   margin-right: 4px;
 }
 .value {
-  font-size: 32px;
+  font-size: 24px;
   padding-left: 16px;
   padding-right: 16px;
   margin-top: 2px;
-  font-family: "Courier New", Courier, monospace;
   text-align: center;
 }
 
@@ -31,6 +31,10 @@
   background-color: rgba(112, 76, 182, 0.1);
   border-radius: 2px;
   transition: all 0.15s;
+}
+.normalButton {
+  font-size: 20px;
+  border-radius: 5px;
 }
 
 .textbox {
@@ -77,6 +81,22 @@
 img {
   max-width: 400px;
   margin: 8px;
+}
+.selectBox {
+  height: 35px;
+  width: 100px;
+  color: rgb(112, 76, 182);
+  border-color: rgb(112, 76, 182);
+  background-color: rgba(112, 76, 182, 0.1);
+  border: 2px solid rgba(112, 76, 182, 0.4);
+  border-radius: 2px;
+  box-sizing: border-box;
+  display: block;
+}
+/* Focus style */
+.selectBox:focus {
+  border-color: rgba(112, 76, 182, 0.4);
+  outline: none;
 }
 
 @media (max-width: 600px) {

@@ -75,12 +75,25 @@ export function Counter() {
         </button>
       </div>
       <div className={styles.row}>
-        <select name="puppy" value={index} onChange={change}>
+        <span className={styles.value}>{count} </span>
+      </div>
+      <div className={styles.row}>
+        <span className={styles.value}>Välj från histori: </span>
+        <select
+          name="puppy"
+          className={styles.selectBox}
+          value={index}
+          onChange={change}
+        >
           {imageArray.map((image, i) => (
             <option value={i}>{i + 1} puppy</option>
           ))}
         </select>
-        <span className={styles.value}>{count} </span>
+      </div>
+      <div className={styles.row}>
+        <button className={clsx(styles.button, styles.normalButton)}>
+          Rensa histori
+        </button>
       </div>
     </div>
   );
