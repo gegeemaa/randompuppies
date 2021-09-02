@@ -89,6 +89,14 @@ export function Counter() {
           Rensa histori
         </button>
       </div>
+      <div className={styles.row}>
+        <p>
+          Källkod:{" "}
+          <a href="https://github.com/gegeemaa/happypuppies">
+            github.com/gegeemaa/happypuppies
+          </a>
+        </p>
+      </div>
     </div>
   );
 }
