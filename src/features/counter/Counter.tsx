@@ -7,7 +7,6 @@ import {
   pervious,
   next,
   incrementAsync,
-  selectStatus,
   selectImageArray,
   selectIndex,
   indexUpdate,
