@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
+import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { FaAngleRight, FaAngleLeft, FaGithub } from "react-icons/fa";
 import clsx from "clsx";
 
 import {
@@ -11,8 +11,8 @@ import {
   selectIndex,
   indexUpdate,
   clear,
-} from "./counterSlice";
-import styles from "./Counter.module.css";
+} from "../redux/counterSlice";
+import styles from "../styles/Counter.module.css";
 
 export function Counter() {
   const imageArray = useAppSelector(selectImageArray);
@@ -89,13 +89,11 @@ export function Counter() {
           Rensa histori
         </button>
       </div>
+      <br />
       <div className={styles.row}>
-        <p>
-          Källkod:{" "}
-          <a href="https://github.com/gegeemaa/happypuppies">
-            github.com/gegeemaa/happypuppies
-          </a>
-        </p>
+        <a href="https://github.com/gegeemaa/happypuppies" target="_blank">
+          <FaGithub />
+        </a>
       </div>
     </div>
   );
