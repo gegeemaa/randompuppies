@@ -1,10 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-// import { useEffect } from "react";
 import { RootState, AppThunk } from "../../app/store";
-// import { fetchCount } from "./counterAPI";
 
 export interface CounterState {
-  value: number;
   status: "" | "loading" | "failed";
   image: string;
   imageArray: string[];
@@ -12,7 +9,6 @@ export interface CounterState {
 }
 
 const initialState: CounterState = {
-  value: 0,
   status: "",
   image: "https://images.dog.ceo/breeds/terrier-norwich/n02094258_307.jpg",
   imageArray: [],
@@ -41,33 +37,11 @@ export const incrementAsync = createAsyncThunk(
   }
 );
 
-// const MyFunctionnalComponent: React.FC = (props) => {
-//   useEffect(() => {
-//     // Create an scoped async function in the hook
-//     async function anyNameFunction() {
-//       await loadContent();
-//     }
-//     // Execute the created function directly
-//     anyNameFunction();
-//   }, []);
-//   return <div></div>;
-// };
-
 export const counterSlice = createSlice({
   name: "counter",
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
     pervious: (state) => {
       if (state.index > 0) {
         state.index -= 1;
@@ -76,19 +50,12 @@ export const counterSlice = createSlice({
     next: (state) => {
       state.index += 1;
     },
-    reset: (state) => {
-      state.value = 0;
-    },
     clear: (state) => {
       state.index = -1;
       state.imageArray = [];
     },
     indexUpdate: (state, action: PayloadAction<number>) => {
       state.index = action.payload;
-    },
-    // Use the PayloadAction type to declare the contents of `action.payload`
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -109,34 +76,13 @@ export const counterSlice = createSlice({
   },
 });
 
-export const {
-  increment,
-  decrement,
-  incrementByAmount,
-  reset,
-  pervious,
-  next,
-  indexUpdate,
-  clear,
-} = counterSlice.actions;
+export const { pervious, next, indexUpdate, clear } = counterSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-export const selectCount = (state: RootState) => state.counter.value;
 export const selectStatus = (state: RootState) => state.counter.status;
 export const selectImageArray = (state: RootState) => state.counter.imageArray;
 export const selectIndex = (state: RootState) => state.counter.index;
-
-// We can also write thunks by hand, which may contain both sync and async logic.
-// Here's an example of conditionally dispatching actions based on current state.
-export const incrementIfOdd =
-  (amount: number): AppThunk =>
-  (dispatch, getState) => {
-    const currentValue = selectCount(getState());
-    if (currentValue % 2 === 1) {
-      dispatch(incrementByAmount(amount));
-    }
-  };
 
 export default counterSlice.reducer;

@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from "react";
-
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 import clsx from "clsx";
 
 import {
-  decrement,
-  increment,
-  incrementByAmount,
-  reset,
   pervious,
   next,
   incrementAsync,
-  incrementIfOdd,
-  selectCount,
   selectStatus,
   selectImageArray,
   selectIndex,
@@ -28,10 +21,6 @@ export function Counter() {
   const dispatch = useAppDispatch();
 
   let count: string;
-
-  // const [incrementAmount, setIncrementAmount] = useState("2");
-
-  // const incrementValue = Number(incrementAmount) || 0;
 
   const onNext = () => {
     if (imageArray.length > index + 1) {
@@ -87,7 +76,9 @@ export function Counter() {
           onChange={change}
         >
           {imageArray.map((image, i) => (
-            <option value={i}>{i + 1} valp</option>
+            <option value={i} key={i}>
+              {i + 1} valp
+            </option>
           ))}
         </select>
       </div>
