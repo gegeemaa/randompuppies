@@ -2,6 +2,8 @@
 
 This project is the gallery to show images of puppies randomly by geting images from external API.
 
+This Random Puppies React Redux App is hosted at https://random-puppies.web.app/.
+
 ### Libraries
 
 A following stack of libraries are used to build the application:
