@@ -6,6 +6,7 @@ export interface PuppyState {
   image: string;
   imageArray: string[];
   index: number;
+  error: string;
 }
 
 const initialState: PuppyState = {
@@ -13,6 +14,7 @@ const initialState: PuppyState = {
   image: "https://images.dog.ceo/breeds/terrier-norwich/n02094258_307.jpg",
   imageArray: [],
   index: -1,
+  error: "",
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -33,6 +35,10 @@ export const incrementAsync = createAsyncThunk(
       .then((data) => {
         // `data` is the parsed version of the JSON returned from the above endpoint.
         return data;
+      })
+      .catch((error) => {
+        // Your error is here!
+        console.log(error);
       });
   }
 );
@@ -66,11 +72,22 @@ export const puppySlice = createSlice({
         state.status = "loading";
       })
       .addCase(incrementAsync.fulfilled, (state, action) => {
-        state.status = "";
-        state.image = action.payload.message;
-        state.imageArray.push(action.payload.message);
-        state.index += 1;
-        console.log(action.payload);
+        if (action.payload.status === "success") {
+          state.status = "";
+          state.image = action.payload.message;
+          state.imageArray.push(action.payload.message);
+          state.index += 1;
+        } else {
+          state.error =
+            "Externt API är tillfälligt nere. Kom tillbaka efter en second!";
+          console.log(state.error);
+        }
+      })
+      .addCase(incrementAsync.rejected, (state, action) => {
+        console.log("end error hevlegdene");
+        state.error =
+          "Externt API är tillfälligt nere. Kom tillbaka efter en second!";
+        console.log(state.error);
       });
   },
 });
@@ -83,5 +100,6 @@ export const { pervious, next, indexUpdate, clear } = puppySlice.actions;
 export const selectStatus = (state: RootState) => state.puppy.status;
 export const selectImageArray = (state: RootState) => state.puppy.imageArray;
 export const selectIndex = (state: RootState) => state.puppy.index;
+export const selectError = (state: RootState) => state.puppy.error;
 
 export default puppySlice.reducer;

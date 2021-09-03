@@ -8,6 +8,7 @@ import {
   incrementAsync,
   selectImageArray,
   selectIndex,
+  selectError,
   indexUpdate,
   clear,
 } from "../redux/puppySlice";
@@ -16,6 +17,7 @@ import styles from "../styles/Style.module.css";
 export function RandomPuppy() {
   const imageArray = useAppSelector(selectImageArray);
   const index = useAppSelector(selectIndex);
+  const error = useAppSelector(selectError);
   const dispatch = useAppDispatch();
 
   let count: string;
@@ -57,7 +59,12 @@ export function RandomPuppy() {
         >
           <FaAngleLeft />
         </button>
-        <img src={imageArray[index]} alt="puppy1" />
+
+        {error !== "" ? (
+          <p>{error}</p>
+        ) : (
+          <img src={imageArray[index]} alt="puppy1" />
+        )}
         <button className={clsx(styles.button, styles.angel)} onClick={onNext}>
           <FaAngleRight />
         </button>
