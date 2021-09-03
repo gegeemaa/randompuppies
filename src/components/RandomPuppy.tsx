@@ -12,9 +12,9 @@ import {
   indexUpdate,
   clear,
 } from "../redux/counterSlice";
-import styles from "../styles/Counter.module.css";
+import styles from "../styles/Style.module.css";
 
-export function Counter() {
+export function RandomPuppy() {
   const imageArray = useAppSelector(selectImageArray);
   const index = useAppSelector(selectIndex);
   const dispatch = useAppDispatch();
