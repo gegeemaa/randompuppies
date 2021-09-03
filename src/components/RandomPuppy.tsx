@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { FaAngleRight, FaAngleLeft, FaGithub } from "react-icons/fa";
 import clsx from "clsx";
-
 import {
   pervious,
   next,
@@ -11,7 +10,7 @@ import {
   selectIndex,
   indexUpdate,
   clear,
-} from "../redux/counterSlice";
+} from "../redux/puppySlice";
 import styles from "../styles/Style.module.css";
 
 export function RandomPuppy() {

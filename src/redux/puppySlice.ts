@@ -1,14 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState, AppThunk } from "../app/store";
+import { RootState, AppThunk } from "./store";
 
-export interface CounterState {
+export interface PuppyState {
   status: "" | "loading" | "failed";
   image: string;
   imageArray: string[];
   index: number;
 }
 
-const initialState: CounterState = {
+const initialState: PuppyState = {
   status: "",
   image: "https://images.dog.ceo/breeds/terrier-norwich/n02094258_307.jpg",
   imageArray: [],
@@ -37,8 +37,8 @@ export const incrementAsync = createAsyncThunk(
   }
 );
 
-export const counterSlice = createSlice({
-  name: "counter",
+export const puppySlice = createSlice({
+  name: "puppy",
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
@@ -69,20 +69,19 @@ export const counterSlice = createSlice({
         state.status = "";
         state.image = action.payload.message;
         state.imageArray.push(action.payload.message);
-        // state.index++;
         state.index += 1;
         console.log(action.payload);
       });
   },
 });
 
-export const { pervious, next, indexUpdate, clear } = counterSlice.actions;
+export const { pervious, next, indexUpdate, clear } = puppySlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-export const selectStatus = (state: RootState) => state.counter.status;
-export const selectImageArray = (state: RootState) => state.counter.imageArray;
-export const selectIndex = (state: RootState) => state.counter.index;
+// in the slice file. For example: `useSelector((state: RootState) => state.puppy.value)`
+export const selectStatus = (state: RootState) => state.puppy.status;
+export const selectImageArray = (state: RootState) => state.puppy.imageArray;
+export const selectIndex = (state: RootState) => state.puppy.index;
 
-export default counterSlice.reducer;
+export default puppySlice.reducer;
