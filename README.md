@@ -11,6 +11,7 @@ A following stack of libraries are used to build the application:
 - ReactJS
 - React redux
 - TypeScript
+- ESLint
 
 ## Installation and Setup
 

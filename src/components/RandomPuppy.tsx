@@ -19,9 +19,6 @@ export function RandomPuppy() {
   const index = useAppSelector(selectIndex);
   const error = useAppSelector(selectError);
   const dispatch = useAppDispatch();
-
-  let count: string;
-
   const onNext = () => {
     if (imageArray.length > index + 1) {
       dispatch(next());
@@ -34,7 +31,7 @@ export function RandomPuppy() {
     dispatch(incrementAsync());
   }, []);
 
-  count = index + 1 + " av " + imageArray.length;
+  const count = index + 1 + " av " + imageArray.length;
 
   const change = (evt: React.ChangeEvent<HTMLSelectElement>) => {
     // const name = evt.target.name;
@@ -97,7 +94,11 @@ export function RandomPuppy() {
       </div>
       <br />
       <div className={styles.row}>
-        <a href="https://github.com/gegeemaa/happypuppies" target="_blank">
+        <a
+          href="https://github.com/gegeemaa/happypuppies"
+          target="_blank"
+          rel="noreferrer"
+        >
           <FaGithub />
         </a>
       </div>
